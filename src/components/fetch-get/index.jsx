@@ -12,7 +12,7 @@ const FetchGet = (props) => {
 
     useEffect(() => {
         const getAllData = async () => {
-            const response = await fetch('https://api-mysql-test-production.up.railway.app/api/blog');
+            const response = await fetch('https://firstdatabase-c5db5-default-rtdb.firebaseio.com/post.json');
             const data = await response.json();
             const formattedData = Object.keys(data).map(key => ({ key, ...data[key] }));
             setCardData(formattedData);
@@ -33,8 +33,8 @@ const FetchGet = (props) => {
         <>
             <input value={search} onChange={searcher} type="text" placeholder='Search' className='form-control' />
             <div className="">
-                {cardData && cardData.map(({ Title, Tags, MainImageURL, key }) => (
-                    <CardPost key={key} MainImageURL={MainImageURL} Title={Title} Tags={Tags}></CardPost>
+                {cardData && cardData.map(({ Titulo, Tags, UrlImagen, key }) => (
+                    <CardPost key={key} UrlImagen={UrlImagen} Titulo={Titulo} Tags={Tags}></CardPost>
                 ))}
             </div>
         </>

@@ -55,13 +55,13 @@ const CrearPost = () => {
               value: true,
               message: "Titulo es requerido",
             },
-            maxLength: 20,
+            maxLength: 50,
             minLength: 2,
           })}
         />
         {errors.Titulo?.type === "required" && <span>Titulo requerido</span>}
         {errors.Titulo?.type === "maxLength" && (
-          <span>Titulo no debe ser mayor a 20 caracteres</span>
+          <span>Titulo no debe ser mayor a 50 caracteres</span>
         )}
         {errors.Titulo?.type === "minLength" && (
           <span>Titulo debe ser mayor a 2 caracteres</span>
@@ -77,7 +77,7 @@ const CrearPost = () => {
               value: true,
               message: "Descripcion es requerido",
             },
-            maxLength: 20,
+            maxLength: 5000,
             minLength: 2,
           })}
         />
@@ -85,7 +85,7 @@ const CrearPost = () => {
           <span>Descripcion requerido</span>
         )}
         {errors.Descripcion?.type === "maxLength" && (
-          <span>Descripcion no debe ser mayor a 20 caracteres</span>
+          <span>Descripcion no debe ser mayor a 5000 caracteres</span>
         )}
         {errors.Descripcion?.type === "minLength" && (
           <span>Descripcion debe ser mayor a 2 caracteres</span>
@@ -101,13 +101,13 @@ const CrearPost = () => {
               value: true,
               message: "Tags es requerido",
             },
-            maxLength: 20,
+            maxLength: 100,
             minLength: 2,
           })}
         />
         {errors.Tags?.type === "required" && <span>Tags requerido</span>}
         {errors.Tags?.type === "maxLength" && (
-          <span>Tags no debe ser mayor a 20 caracteres</span>
+          <span>Tags no debe ser mayor a 100 caracteres</span>
         )}
         {errors.Tags?.type === "minLength" && (
           <span>Tags debe ser mayor a 2 caracteres</span>
@@ -123,7 +123,7 @@ const CrearPost = () => {
               value: true,
               message: "UrlImagen es requerido",
             },
-            maxLength: 100,
+            maxLength: 500,
             minLength: 2,
           })}
         />
@@ -131,7 +131,7 @@ const CrearPost = () => {
           <span>UrlImagen requerido</span>
         )}
         {errors.UrlImagen?.type === "maxLength" && (
-          <span>UrlImagen no debe ser mayor a 20 caracteres</span>
+          <span>UrlImagen no debe ser mayor a 500 caracteres</span>
         )}
         {errors.UrlImagen?.type === "minLength" && (
           <span>UrlImagen debe ser mayor a 2 caracteres</span>

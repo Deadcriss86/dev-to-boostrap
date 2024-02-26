@@ -4,6 +4,7 @@ import SigIn from "../SigIn";
 import CrearPost from "../CrearPost";
 import Formulario from "../CrearUsers";
 import "bootstrap/dist/css/bootstrap.min.css";
+import NotFound from "../NotFound"
 
 const AppRoutes = () => {
   let routes = useRoutes([
@@ -11,6 +12,7 @@ const AppRoutes = () => {
     { path: "/SigIn", element: <SigIn /> },
     { path: "/CrearPost", element: <CrearPost /> },
     { path: "/CrearUSers", element: <Formulario /> },
+    { path: '/*', element: <NotFound /> },
   ]);
   return routes;
 };
