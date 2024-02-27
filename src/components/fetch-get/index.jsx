@@ -39,16 +39,16 @@ const FetchGet = (props) => {
   return (
     <>
       <div className="row container-fluid align-items-center">
-        <div className="border col-1 text-center d-flex pt-1 rounded bg-black text-white">
-          dev
+        <div className="border col-1 text-center d-flex pt-1 rounded bg-black text-white p-2">
+          Dev
         </div>
         <div className="col-8">
           <input
             value={search}
             onChange={searcher}
             type="text"
-            placeholder="Search!"
-            className="form-control"
+            placeholder="Search                                                                                🔍"
+            className="form-control text-center"
           />
         </div>
         <div className="col-3 d-flex justify-content-end">
@@ -56,6 +56,20 @@ const FetchGet = (props) => {
             Create Account
           </button>
           <button className="btn btn-light btn-sm ms-2">Login</button>
+        </div>
+      </div>
+
+      <div class="row justify-content-start align-items-start">
+        <div class="col-auto">
+          <button class="btn custom-button">
+            <strong>Relevant</strong>
+          </button>
+        </div>
+        <div class="col-auto">
+          <button class="btn custom-button">Latest</button>
+        </div>
+        <div class="col-auto">
+          <button class="btn custom-button">Top</button>
         </div>
       </div>
 
