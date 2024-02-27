@@ -1,0 +1,15 @@
+.my-zoom-effect {
+    transition: transform 0.2s ease-in-out; /* Añade una transición suave para el efecto de zoom */
+}
+
+.my-zoom-effect:hover {
+    transform: scale(1.05); /* Aplica un pequeño zoom al pasar el mouse sobre el elemento */
+}
+
+.my-text-blue {
+    color: black; /* Color inicial del texto */
+}
+
+.my-text-blue:hover {
+    color: blue; /* Cambia el color del texto a azul al pasar el mouse */
+}
