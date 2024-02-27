@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { CardPost } from "../card-post";
+import { Button } from "bootstrap";
+import CreaBoton from "../button/button";
+
 
 const FetchGet = (props) => {
-    const [cardData, setCardData] = useState(null);
+    const [cardData, setCardData] = useState([]);
     const [search, setSearch] = useState("");
 
     const searcher = (e) => {
-        setSearch(e.target.value);
-        refreshFilter();
+        let letter = e.target.value
+        setSearch(letter);
     }
 
     useEffect(() => {
@@ -24,17 +27,18 @@ const FetchGet = (props) => {
     }, []);
 
     // Filtrar los datos cuando la búsqueda cambia
-    const refreshFilter=() => {
-      const results = !search ? cardData : cardData.filter(dato => dato.Title.toLowerCase().includes(search.toLowerCase()));
-        setCardData(results);
-    }
+    const results = !search ? cardData : cardData.filter((item) => item.Titulo.toLowerCase().includes(search.toLowerCase()));
+
 
     return (
         <>
             <input value={search} onChange={searcher} type="text" placeholder='Search' className='form-control' />
             <div className="">
-                {cardData && cardData.map(({ Titulo, Tags, UrlImagen, key }) => (
-                    <CardPost key={key} UrlImagen={UrlImagen} Titulo={Titulo} Tags={Tags}></CardPost>
+                {cardData && [...results].reverse().map(({ Titulo, Tags, UrlImagen, key }) => (
+                     <div key={key}>
+                     <CardPost UrlImagen={UrlImagen} Titulo={Titulo} Tags={Tags} />
+                     <CreaBoton path={`/details/${key}`} title="ver mas..." />
+                 </div>
                 ))}
             </div>
         </>

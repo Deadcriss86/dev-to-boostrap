@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 const CardLogin = () => {
   return (
     <>
@@ -15,7 +17,7 @@ const CardLogin = () => {
               Create Account
             </button>
             <button class="btn btn-outline-light" type="button">
-              Log In
+              <NavLink to="/Login">Log In</NavLink>
             </button>
           </div>
         </div>
