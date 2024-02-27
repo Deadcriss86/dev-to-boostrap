@@ -1,6 +1,7 @@
 import CardLogin from "../../components/card-login";
 import FetchGet from "../../components/fetch-get";
 import PanelIzq from "../../components/panelIzq"
+import Discuss from "../../components/panel-der"
 const Home=() => {
   return(
     <>
@@ -12,7 +13,9 @@ const Home=() => {
         <div className="col-6">
           <FetchGet />
         </div>
-        <div className="col-3">3</div>
+        <div className="col-3 pt-5">
+          <Discuss/>
+        </div>
       </div>
     </>
   )

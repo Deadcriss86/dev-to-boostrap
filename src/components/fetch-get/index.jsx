@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { CardPost } from "../card-post";
-import './style.css';
+import "./style.css";
 import { Link } from "react-router-dom";
 
 const FetchGet = (props) => {
@@ -38,29 +38,42 @@ const FetchGet = (props) => {
 
   return (
     <>
-    <input 
-    value={search} 
-    onChange={searcher} 
-    type="text" 
-    placeholder='Search' 
-    className='form-control' 
-/>
+      <div className="row container-fluid align-items-center">
+        <div className="border col-1 text-center d-flex pt-1 rounded bg-black text-white">
+          dev
+        </div>
+        <div className="col-8">
+          <input
+            value={search}
+            onChange={searcher}
+            type="text"
+            placeholder="Search!"
+            className="form-control"
+          />
+        </div>
+        <div className="col-3 d-flex justify-content-end">
+          <button className="btn btn-primary btn-sm mr-2">
+            Create Account
+          </button>
+          <button className="btn btn-light btn-sm ms-2">Login</button>
+        </div>
+      </div>
 
-<div className="">
-    {cardData && [...results].reverse().map(({ Titulo, Tags, UrlImagen, key }) => (
-        <Link 
-            to={`/details/${key}`} 
-            key={key} 
-            className="text-dark d-block my-zoom-effect my-text-blue" // Añade las clases para el efecto de zoom y cambio de color
-            style={{ textDecoration: 'none' }} // Elimina la línea debajo del texto
-        >
-            <div className="text-dark">
+      <div className="">
+        {cardData &&
+          [...results].reverse().map(({ Titulo, Tags, UrlImagen, key }) => (
+            <Link
+              to={`/details/${key}`}
+              key={key}
+              className="text-dark d-block my-zoom-effect my-text-blue" // Añade las clases para el efecto de zoom y cambio de color
+              style={{ textDecoration: "none" }} // Elimina la línea debajo del texto
+            >
+              <div className="text-dark">
                 <CardPost UrlImagen={UrlImagen} Titulo={Titulo} Tags={Tags} />
-            </div>
-        </Link>
-    ))}
-</div>
-
+              </div>
+            </Link>
+          ))}
+      </div>
     </>
   );
 };
