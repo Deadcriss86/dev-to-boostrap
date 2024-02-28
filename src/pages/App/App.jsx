@@ -7,6 +7,7 @@ import LoginForm from "../Login"
 import NotFound from "../NotFound"
 import "bootstrap/dist/css/bootstrap.min.css";
 import Details from "../details/details";
+import './App.css';
 
 const AppRoutes = () => {
   let routes = useRoutes([
