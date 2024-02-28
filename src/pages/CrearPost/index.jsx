@@ -20,7 +20,8 @@ const CrearPost = () => {
   const onSubmit = handleSubmit(async (data) => {
     try {
       // Obtener la fecha actual
-      const fechaCreacion = new Date().toISOString();
+      const today = new Date();
+      const fechaCreacion = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
 
       // Agregar la fecha de creación a los datos del formulario
       const postData = { ...data, fechaCreacion };
@@ -61,13 +62,13 @@ const CrearPost = () => {
               value: true,
               message: "Titulo es requerido",
             },
-            maxLength: 150,
+            maxLength: 50,
             minLength: 2,
           })}
         />
         {errors.Titulo?.type === "required" && <span>Titulo requerido</span>}
         {errors.Titulo?.type === "maxLength" && (
-          <span>Titulo no debe ser mayor a 150 caracteres</span>
+          <span>Titulo no debe ser mayor a 50 caracteres</span>
         )}
         {errors.Titulo?.type === "minLength" && (
           <span>Titulo debe ser mayor a 2 caracteres</span>
