@@ -1,9 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { CardPost } from "../card-post";
 import "./style.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const FetchGet = (props) => {
+  const [token, setToken] = useState(localStorage.getItem("token"));
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setToken(null);
+    navigate("/");
+  };
+
   const [cardData, setCardData] = useState([]);
   const [search, setSearch] = useState("");
 
@@ -11,6 +20,8 @@ const FetchGet = (props) => {
     let letter = e.target.value;
     setSearch(letter);
   };
+
+  
 
   useEffect(() => {
     const getAllData = async () => {
@@ -47,16 +58,23 @@ const FetchGet = (props) => {
             value={search}
             onChange={searcher}
             type="text"
-            placeholder="Search                                                                                🔍"
+            placeholder="Search 🔍"
             className="form-control text-center"
           />
         </div>
         <div className="col-3 d-flex justify-content-end">
-          <button className="btn btn-primary btn-sm mr-2">
-            Create Account
-          </button>
-          <button className="btn btn-light btn-sm ms-2">Login</button>
-        </div>
+  {token ? (
+    <>
+      <Link to="/crearpost" className="btn btn-primary btn-sm mr-2">Create Post</Link>
+      <button className="btn btn-light btn-sm ms-2" onClick={handleLogout}>Log out</button>
+    </>
+  ) : (
+    <>
+      <Link to="/register" className="btn btn-primary btn-sm mr-2">Create Account</Link>
+      <Link to="/login" className="btn btn-light btn-sm ms-2">Login</Link>
+    </>
+  )}
+</div>
       </div>
 
       <div class="row justify-content-start align-items-start">

@@ -10,7 +10,7 @@ function Formulario() {
     reset,
   } = useForm({
     defaultValues: {
-      nombre: "",
+      username: "",
       correo: "",
       password: "",
       confirmarPassword: "",
@@ -46,25 +46,25 @@ function Formulario() {
   return (
     <form onSubmit={onSubmit}>
       <div>
-        <label>Nombre:</label>
+        <label>username:</label>
         <input
           type="text"
-          name="nombre"
-          {...register("nombre", {
+          name="username"
+          {...register("username", {
             required: {
               value: true,
-              message: "Nombre es requerido",
+              message: "username es requerido",
             },
             maxLength: 20,
             minLength: 2,
           })}
         />
-        {errors.nombre?.type === "required" && <span>Nombre requerido</span>}
-        {errors.nombre?.type === "maxLength" && (
-          <span>Nombre no debe ser mayor a 20 caracteres</span>
+        {errors.username?.type === "required" && <span>username requerido</span>}
+        {errors.username?.type === "maxLength" && (
+          <span>username no debe ser mayor a 20 caracteres</span>
         )}
-        {errors.nombre?.type === "minLength" && (
-          <span>Nombre debe ser mayor a 2 caracteres</span>
+        {errors.username?.type === "minLength" && (
+          <span>username debe ser mayor a 2 caracteres</span>
         )}
       </div>
 
