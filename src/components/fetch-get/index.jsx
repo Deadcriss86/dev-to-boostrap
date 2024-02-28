@@ -93,7 +93,7 @@ const FetchGet = (props) => {
 
       <div className="">
         {cardData &&
-          [...results].reverse().map(({ Titulo, Tags, UrlImagen, key }) => (
+          [...results].reverse().map(({ Titulo, Tags, UrlImagen,fechaCreacion, key }) => (
             <Link
               to={`/details/${key}`}
               key={key}
@@ -101,7 +101,7 @@ const FetchGet = (props) => {
               style={{ textDecoration: "none" }} // Elimina la línea debajo del texto
             >
               <div className="text-dark">
-                <CardPost UrlImagen={UrlImagen} Titulo={Titulo} Tags={Tags} />
+                <CardPost UrlImagen={UrlImagen} Titulo={Titulo} Tags={Tags} fechaCreacion={fechaCreacion} />
               </div>
             </Link>
           ))}

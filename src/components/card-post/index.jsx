@@ -1,6 +1,6 @@
 import { FaThumbsUp, FaComment, FaSave } from "react-icons/fa";
 
-export const CardPost = ({ Titulo, Tags, UrlImagen, Descripcion }) => {
+export const CardPost = ({ Titulo, Tags, UrlImagen, Descripcion, fechaCreacion }) => {
   // Manejo de errores si la URL de la imagen está vacía
   const imgUrl = UrlImagen || "https://via.placeholder.com/150";
 
@@ -20,7 +20,7 @@ export const CardPost = ({ Titulo, Tags, UrlImagen, Descripcion }) => {
             <p className="m-0 text-muted">for The DEV Team</p>
           </div>
         </div>
-        <span className="text-muted">Feb 27</span>
+        <span className="text-muted">{fechaCreacion}</span>
       </div>
       <div className="px-5 text-start">
         <h2 className="fs-2">{Titulo}</h2>
