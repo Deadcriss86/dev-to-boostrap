@@ -19,6 +19,12 @@ const CrearPost = () => {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
+      // Obtener la fecha actual
+      const fechaCreacion = new Date().toISOString();
+
+      // Agregar la fecha de creación a los datos del formulario
+      const postData = { ...data, fechaCreacion };
+
       const response = await fetch(
         "https://firstdatabase-c5db5-default-rtdb.firebaseio.com/post.json",
         {
@@ -26,7 +32,7 @@ const CrearPost = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(data),
+          body: JSON.stringify(postData),
         }
       );
 
@@ -55,13 +61,13 @@ const CrearPost = () => {
               value: true,
               message: "Titulo es requerido",
             },
-            maxLength: 50,
+            maxLength: 150,
             minLength: 2,
           })}
         />
         {errors.Titulo?.type === "required" && <span>Titulo requerido</span>}
         {errors.Titulo?.type === "maxLength" && (
-          <span>Titulo no debe ser mayor a 50 caracteres</span>
+          <span>Titulo no debe ser mayor a 150 caracteres</span>
         )}
         {errors.Titulo?.type === "minLength" && (
           <span>Titulo debe ser mayor a 2 caracteres</span>
