@@ -2,6 +2,7 @@ import CardLogin from "../../components/card-login";
 import FetchGet from "../../components/fetch-get";
 import PanelIzq from "../../components/panelIzq"
 import Discuss from "../../components/panel-der"
+import { Outlet } from "react-router-dom";
 const Home=() => {
   return(
     <>

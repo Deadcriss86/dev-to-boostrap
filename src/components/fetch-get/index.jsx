@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import { CardPost } from "../card-post";
 import "./style.css";
 import { Link, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const FetchGet = (props) => {
   const [token, setToken] = useState(localStorage.getItem("token"));
+  const [url, setURL] = useState("/")
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -21,6 +23,20 @@ const FetchGet = (props) => {
     setSearch(letter);
   };
 
+  //Botones que actualizan el estado de la URL para aplicar los filters
+
+  const topButton = () => {
+    setURL("/top")
+  }
+
+  const latestButton = () => {
+    setURL("/")
+  }
+
+  const relevantButton = () => {
+    setURL("/relevant")
+  }
+//
   
 
   useEffect(() => {
@@ -79,20 +95,20 @@ const FetchGet = (props) => {
 
       <div class="row justify-content-start align-items-start">
         <div class="col-auto">
-          <button class="btn custom-button">
+          <button onClick={relevantButton} class="btn custom-button">
             <strong>Relevant</strong>
           </button>
         </div>
         <div class="col-auto">
-          <button class="btn custom-button">Latest</button>
+          <button onClick={latestButton} class="btn custom-button">Latest</button>
         </div>
         <div class="col-auto">
-          <button class="btn custom-button">Top</button>
+            <button onClick={topButton} class="btn custom-button">Top</button>
         </div>
       </div>
 
       <div className="">
-        {cardData &&
+        {url === "/" &&
           [...results].reverse().map(({ Titulo, Tags, UrlImagen,fechaCreacion, key }) => (
             <Link
               to={`/details/${key}`}
@@ -106,6 +122,38 @@ const FetchGet = (props) => {
             </Link>
           ))}
       </div>
+      
+      <div className="">
+        {url === "/top" &&
+          [...results].reverse().filter((user) => user.Descripcion.length > 25).map(({ Titulo, Tags, UrlImagen,fechaCreacion, key }) => (
+            <Link
+              to={`/details/${key}`}
+              key={key}
+              className="text-dark d-block my-zoom-effect my-text-blue" // Añade las clases para el efecto de zoom y cambio de color
+              style={{ textDecoration: "none" }} // Elimina la línea debajo del texto
+            >
+              <div className="text-dark">
+                <CardPost UrlImagen={UrlImagen} Titulo={Titulo} Tags={Tags} fechaCreacion={fechaCreacion} />
+              </div>
+            </Link>
+          ))}
+      </div>
+      <div className="">
+        {url === "/relevant" &&
+          [...results].reverse().filter((user) => user.Titulo.length > 40).map(({ Titulo, Tags, UrlImagen,fechaCreacion, key }) => (
+            <Link
+              to={`/details/${key}`}
+              key={key}
+              className="text-dark d-block my-zoom-effect my-text-blue" // Añade las clases para el efecto de zoom y cambio de color
+              style={{ textDecoration: "none" }} // Elimina la línea debajo del texto
+            >
+              <div className="text-dark">
+                <CardPost UrlImagen={UrlImagen} Titulo={Titulo} Tags={Tags} fechaCreacion={fechaCreacion} />
+              </div>
+            </Link>
+          ))}
+      </div>
+      
     </>
   );
 };
