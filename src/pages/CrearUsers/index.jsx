@@ -1,7 +1,9 @@
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 function Formulario() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -43,7 +45,7 @@ function Formulario() {
       }
     } catch (error) {
       console.error("Error al enviar los datos:", error);
-    }
+    } navigate("/login");
   });
 
   return (

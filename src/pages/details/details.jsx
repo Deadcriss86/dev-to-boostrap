@@ -2,6 +2,8 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { CardPage } from "../../components/card-page";
 import Likes from "../../components/PanelLikes"
+import PanelIzq from "../../components/panelIzq";
+import Discuss from "../../components/panel-der";
 
 const Details = () => {
   const { id } = useParams();
@@ -48,7 +50,7 @@ const Details = () => {
                   ))}
             </div>
           </div>
-          <div className=" col-3">03</div>
+          <div className=" col-3"></div>
         </div>
       </div>
     </>

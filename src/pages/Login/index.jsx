@@ -36,7 +36,7 @@ function LoginForm() {
       console.error("There was a problem with the fetch operation:", error);
       setErrorMessage(
         "Hubo un problema al intentar iniciar sesión. Por favor, inténtalo de nuevo más tarde."
-      );
+      ); navigate("/session-timed-out");
     }
   };
 

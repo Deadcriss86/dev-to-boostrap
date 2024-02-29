@@ -12,10 +12,10 @@ const CardLogin = () => {
           careers.
         </p>
         <div className="d-grid gap-2 col-12 mx-auto">
-          <button className="btn btn-outline-primary btn-block" type="button">
+          <NavLink to="/register" className="btn btn-outline-primary btn-block" type="button">
             Create Account
-          </button>
-          <NavLink to="/Login" className="btn btn-outline-light btn-block" type="button">
+          </NavLink>
+          <NavLink to="/Login" className="btn btn-outline-primary btn-block" type="button">
             <span className="text-gray">Log In</span>
           </NavLink>
         </div>

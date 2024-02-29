@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { CardPost } from "../card-post";
 import "./style.css";
 import { Link, useNavigate } from "react-router-dom";
-import { NavLink } from "react-router-dom";
+
 
 const FetchGet = (props) => {
   const [token, setToken] = useState(localStorage.getItem("token"));
@@ -108,7 +108,7 @@ const FetchGet = (props) => {
       </div>
 
       <div className="">
-        {url === "/" &&
+        {url == "/" &&
           [...results].reverse().map(({ Titulo, Tags, UrlImagen,fechaCreacion, key }) => (
             <Link
               to={`/details/${key}`}
@@ -124,8 +124,8 @@ const FetchGet = (props) => {
       </div>
       
       <div className="">
-        {url === "/top" &&
-          [...results].reverse().filter((user) => user.Descripcion.length > 25).map(({ Titulo, Tags, UrlImagen,fechaCreacion, key }) => (
+        {url == "/top" &&
+          results.filter((user) => user.Descripcion.length > 25).map(({ Titulo, Tags, UrlImagen,fechaCreacion, key }) => (
             <Link
               to={`/details/${key}`}
               key={key}
@@ -139,8 +139,8 @@ const FetchGet = (props) => {
           ))}
       </div>
       <div className="">
-        {url === "/relevant" &&
-          [...results].reverse().filter((user) => user.Titulo.length > 40).map(({ Titulo, Tags, UrlImagen,fechaCreacion, key }) => (
+        {url == "/relevant" &&
+          results.filter((user) => user.Titulo.length > 40).map(({ Titulo, Tags, UrlImagen,fechaCreacion, key }) => (
             <Link
               to={`/details/${key}`}
               key={key}
