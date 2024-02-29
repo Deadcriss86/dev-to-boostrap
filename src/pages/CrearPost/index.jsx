@@ -6,7 +6,6 @@ const CrearPost = () => {
     register,
     handleSubmit,
     formState: { errors },
-    watch,
     reset,
   } = useForm({
     defaultValues: {
@@ -17,13 +16,14 @@ const CrearPost = () => {
     },
   });
 
+  const formRef = useRef(null);
+
   const onSubmit = handleSubmit(async (data) => {
     try {
-      // Obtener la fecha actual
       const today = new Date();
-      const fechaCreacion = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
-
-      // Agregar la fecha de creación a los datos del formulario
+      const fechaCreacion = `${today.getDate()}-${
+        today.getMonth() + 1
+      }-${today.getFullYear()}`;
       const postData = { ...data, fechaCreacion };
 
       const response = await fetch(
@@ -38,11 +38,10 @@ const CrearPost = () => {
       );
 
       if (response.ok) {
-        // Éxito en el envío
         console.log("Datos enviados correctamente");
         reset();
+        formRef.current.reset();
       } else {
-        // Error en el envío
         console.error("Error al enviar los datos");
       }
     } catch (error) {
@@ -51,12 +50,13 @@ const CrearPost = () => {
   });
 
   return (
-    <form onSubmit={onSubmit}>
-      <div>
-        <label>Titulo:</label>
+    <form onSubmit={onSubmit} ref={formRef} className="container mt-5">
+      <div className="mb-3">
+        <label className="form-label">Titulo:</label>
         <input
           type="text"
           name="Titulo"
+          className="form-control"
           {...register("Titulo", {
             required: {
               value: true,
@@ -66,19 +66,26 @@ const CrearPost = () => {
             minLength: 2,
           })}
         />
-        {errors.Titulo?.type === "required" && <span>Titulo requerido</span>}
+        {errors.Titulo?.type === "required" && (
+          <span className="text-danger">Titulo requerido</span>
+        )}
         {errors.Titulo?.type === "maxLength" && (
-          <span>Titulo no debe ser mayor a 50 caracteres</span>
+          <span className="text-danger">
+            Titulo no debe ser mayor a 50 caracteres
+          </span>
         )}
         {errors.Titulo?.type === "minLength" && (
-          <span>Titulo debe ser mayor a 2 caracteres</span>
+          <span className="text-danger">
+            Titulo debe ser mayor a 2 caracteres
+          </span>
         )}
       </div>
-      <div>
-        <label>Descripcion:</label>
+      <div className="mb-3">
+        <label className="form-label">Descripcion:</label>
         <input
           type="text"
           name="Descripcion"
+          className="form-control"
           {...register("Descripcion", {
             required: {
               value: true,
@@ -89,20 +96,25 @@ const CrearPost = () => {
           })}
         />
         {errors.Descripcion?.type === "required" && (
-          <span>Descripcion requerido</span>
+          <span className="text-danger">Descripcion requerido</span>
         )}
         {errors.Descripcion?.type === "maxLength" && (
-          <span>Descripcion no debe ser mayor a 5000 caracteres</span>
+          <span className="text-danger">
+            Descripcion no debe ser mayor a 5000 caracteres
+          </span>
         )}
         {errors.Descripcion?.type === "minLength" && (
-          <span>Descripcion debe ser mayor a 2 caracteres</span>
+          <span className="text-danger">
+            Descripcion debe ser mayor a 2 caracteres
+          </span>
         )}
       </div>
-      <div>
-        <label>Tags:</label>
+      <div className="mb-3">
+        <label className="form-label">Tags:</label>
         <input
           type="text"
           name="Tags"
+          className="form-control"
           {...register("Tags", {
             required: {
               value: true,
@@ -112,19 +124,26 @@ const CrearPost = () => {
             minLength: 2,
           })}
         />
-        {errors.Tags?.type === "required" && <span>Tags requerido</span>}
+        {errors.Tags?.type === "required" && (
+          <span className="text-danger">Tags requerido</span>
+        )}
         {errors.Tags?.type === "maxLength" && (
-          <span>Tags no debe ser mayor a 100 caracteres</span>
+          <span className="text-danger">
+            Tags no debe ser mayor a 100 caracteres
+          </span>
         )}
         {errors.Tags?.type === "minLength" && (
-          <span>Tags debe ser mayor a 2 caracteres</span>
+          <span className="text-danger">
+            Tags debe ser mayor a 2 caracteres
+          </span>
         )}
       </div>
-      <div>
-        <label>UrlImagen:</label>
+      <div className="mb-3">
+        <label className="form-label">UrlImagen:</label>
         <input
           type="text"
           name="UrlImagen"
+          className="form-control"
           {...register("UrlImagen", {
             required: {
               value: true,
@@ -135,17 +154,23 @@ const CrearPost = () => {
           })}
         />
         {errors.UrlImagen?.type === "required" && (
-          <span>UrlImagen requerido</span>
+          <span className="text-danger">UrlImagen requerido</span>
         )}
         {errors.UrlImagen?.type === "maxLength" && (
-          <span>UrlImagen no debe ser mayor a 500 caracteres</span>
+          <span className="text-danger">
+            UrlImagen no debe ser mayor a 500 caracteres
+          </span>
         )}
         {errors.UrlImagen?.type === "minLength" && (
-          <span>UrlImagen debe ser mayor a 2 caracteres</span>
+          <span className="text-danger">
+            UrlImagen debe ser mayor a 2 caracteres
+          </span>
         )}
       </div>
 
-      <button type="submit">Enviar</button>
+      <button type="submit" className="btn btn-primary">
+        Enviar
+      </button>
     </form>
   );
 };

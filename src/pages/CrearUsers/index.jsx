@@ -22,57 +22,68 @@ function Formulario() {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      const response = await fetch('https://firstdatabase-c5db5-default-rtdb.firebaseio.com/users.json', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      });
-      
+      const response = await fetch(
+        "https://firstdatabase-c5db5-default-rtdb.firebaseio.com/users.json",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+
       if (response.ok) {
         // Éxito en el envío
-        console.log('Datos enviados correctamente');
+        console.log("Datos enviados correctamente");
         reset();
       } else {
         // Error en el envío
-        console.error('Error al enviar los datos');
+        console.error("Error al enviar los datos");
       }
     } catch (error) {
-      console.error('Error al enviar los datos:', error);
+      console.error("Error al enviar los datos:", error);
     }
   });
 
   return (
-    <form onSubmit={onSubmit}>
-      <div>
-        <label>username:</label>
+    <form onSubmit={onSubmit} className="container mt-4">
+      <div className="mb-3">
+        <label htmlFor="username" className="form-label">
+          Username:
+        </label>
         <input
           type="text"
-          name="username"
+          id="username"
+          className={`form-control ${errors.username ? "is-invalid" : ""}`}
           {...register("username", {
             required: {
               value: true,
-              message: "username es requerido",
+              message: "Username es requerido",
             },
-            maxLength: 20,
-            minLength: 2,
+            maxLength: {
+              value: 20,
+              message: "Username no debe ser mayor a 20 caracteres",
+            },
+            minLength: {
+              value: 2,
+              message: "Username debe ser mayor a 2 caracteres",
+            },
           })}
         />
-        {errors.username?.type === "required" && <span>username requerido</span>}
-        {errors.username?.type === "maxLength" && (
-          <span>username no debe ser mayor a 20 caracteres</span>
-        )}
-        {errors.username?.type === "minLength" && (
-          <span>username debe ser mayor a 2 caracteres</span>
+        {errors.username && (
+          <div className="invalid-feedback">{errors.username.message}</div>
         )}
       </div>
 
-      <div>
-        <label>Correo Electrónico:</label>
+      <div className="mb-3">
+        <label htmlFor="correo" className="form-label">
+          Correo Electrónico:
+        </label>
         <input
           type="email"
-          name="correo"
+          id="correo"
+          className={`form-control ${errors.correo ? "is-invalid" : ""}`}
           {...register("correo", {
             required: {
               value: true,
@@ -84,14 +95,19 @@ function Formulario() {
             },
           })}
         />
-        {errors.correo && <span>{errors.correo.message}</span>}
+        {errors.correo && (
+          <div className="invalid-feedback">{errors.correo.message}</div>
+        )}
       </div>
 
-      <div>
-        <label>Contraseña:</label>
+      <div className="mb-3">
+        <label htmlFor="password" className="form-label">
+          Contraseña:
+        </label>
         <input
           type="password"
-          name="password"
+          id="password"
+          className={`form-control ${errors.password ? "is-invalid" : ""}`}
           {...register("password", {
             required: {
               value: true,
@@ -103,14 +119,21 @@ function Formulario() {
             },
           })}
         />
-        {errors.password && <span>{errors.password.message}</span>}
+        {errors.password && (
+          <div className="invalid-feedback">{errors.password.message}</div>
+        )}
       </div>
 
-      <div>
-        <label>Confirma Contraseña:</label>
+      <div className="mb-3">
+        <label htmlFor="confirmarPassword" className="form-label">
+          Confirma Contraseña:
+        </label>
         <input
           type="password"
-          name="confirmarPassword"
+          id="confirmarPassword"
+          className={`form-control ${
+            errors.confirmarPassword ? "is-invalid" : ""
+          }`}
           {...register("confirmarPassword", {
             required: {
               value: true,
@@ -125,11 +148,15 @@ function Formulario() {
           })}
         />
         {errors.confirmarPassword && (
-          <span>{errors.confirmarPassword.message}</span>
+          <div className="invalid-feedback">
+            {errors.confirmarPassword.message}
+          </div>
         )}
       </div>
 
-      <button type="submit">Enviar</button>
+      <button type="submit" className="btn btn-primary">
+        Enviar
+      </button>
     </form>
   );
 }
