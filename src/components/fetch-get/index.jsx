@@ -25,6 +25,10 @@ const FetchGet = (props) => {
 
   //Botones que actualizan el estado de la URL para aplicar los filters
 
+  const refreshButton = () => {
+    setURL("/")
+  }
+
   const topButton = () => {
     setURL("/top")
   }
@@ -66,7 +70,7 @@ const FetchGet = (props) => {
   return (
     <>
       <div className="row container-fluid align-items-center">
-        <div className="border col-1 text-center d-flex pt-1 rounded bg-black text-white p-2">
+        <div onClick={latestButton} className="border col-1 text-center d-flex pt-1 rounded bg-black text-white p-2 pointer-cursor">
           Dev
         </div>
         <div className="col-8">
