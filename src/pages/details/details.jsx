@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { CardPage } from "../../components/card-page";
-import Likes from "../../components/PanelLikes"
+import Likes from "../../components/PanelLikes";
 import PanelIzq from "../../components/panelIzq";
 import Discuss from "../../components/panel-der";
 
@@ -32,10 +32,10 @@ const Details = () => {
         style={{ height: "100vh" }}
       >
         <div className="row">
-          <div className="col-1">
-            <Likes/>
+          <div className="col-lg-1 d-none d-md-none d-lg-block">
+            <Likes />
           </div>
-          <div className=" col-6">
+          <div className=" col-lg-6">
             <div className="">
               {cardData &&
                 cardData
