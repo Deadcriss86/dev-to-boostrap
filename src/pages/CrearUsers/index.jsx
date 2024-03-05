@@ -1,9 +1,10 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 function Formulario() {
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState("");
   const {
     register,
     handleSubmit,
@@ -24,32 +25,55 @@ function Formulario() {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      const response = await fetch(
-        "https://firstdatabase-c5db5-default-rtdb.firebaseio.com/users.json",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        }
+      // Verificar si el usuario ya existe
+      const usersResponse = await fetch(
+        "https://firstdatabase-c5db5-default-rtdb.firebaseio.com/users.json"
+      );
+      const usersData = await usersResponse.json();
+
+      // Verificar si el usuario o correo ya existen
+      const userExists = Object.values(usersData).some(
+        (user) => user.username === data.username || user.correo === data.correo
       );
 
-      if (response.ok) {
-        // Éxito en el envío
-        console.log("Datos enviados correctamente");
-        reset();
+      if (userExists) {
+        // Usuario o correo ya existe, mostrar mensaje de error
+        setErrorMessage("El usuario o correo ya están registrados");
       } else {
-        // Error en el envío
-        console.error("Error al enviar los datos");
+        // Usuario y correo no existen, proceder con el registro
+        const response = await fetch(
+          "https://firstdatabase-c5db5-default-rtdb.firebaseio.com/users.json",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          }
+        );
+
+        if (response.ok) {
+          // Éxito en el envío
+          console.log("Datos enviados correctamente");
+          reset();
+        } else {
+          // Error en el envío
+          console.error("Error al enviar los datos");
+        }
       }
     } catch (error) {
       console.error("Error al enviar los datos:", error);
-    } navigate("/login");
+    }
   });
 
   return (
     <form onSubmit={onSubmit} className="container mt-4">
+      {errorMessage && (
+        <div className="alert alert-danger" role="alert">
+          {errorMessage}
+        </div>
+      )}
+
       <div className="mb-3">
         <label htmlFor="username" className="form-label">
           Username:
